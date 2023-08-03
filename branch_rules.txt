@@ -1,0 +1,13 @@
+git switch -c redux-branch (or git checkout -b redux-branch)
+
+make changes within the branch
+
+git add .
+
+git commit -m "my-commit"
+
+git switch main (or git checkout main)
+
+git merge redux-branch
+
+git push origin main
