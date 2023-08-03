@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUsers } from '../../store/reducers/ActionCreators';
+import React from "react";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { fetchUsers } from "../../store/reducers/ActionCreators";
 
 const App = () => {
-  const { users, isLoading, error } = useAppSelector(state => state.userReducer);
+  const { users, isLoading, error } = useAppSelector(
+    (state) => state.userReducer
+  );
   // const {FetchUsers} = userSlice.actions;
   const dispatch = useAppDispatch();
 
-  console.log(error)
-
+  console.log(error);
   useEffect(() => {
-    dispatch(fetchUsers())
-  }, [dispatch])
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return (
     <div>
@@ -19,6 +21,6 @@ const App = () => {
       {error ? <h2>{error}</h2> : <p>{JSON.stringify(users, null, 2)}</p>}
     </div>
   );
-}
+};
 
-export default App
+export default App;
