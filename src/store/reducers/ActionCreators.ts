@@ -1,16 +1,12 @@
 import { IUser } from "../../models/IUser";
-import { AppDispatch } from "../store";
 import axios from "axios";
-import { userSlice } from "./UserSlice";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchUsers = () => async (dispatch: AppDispatch) => {
+export const fetchUsers2 = createAsyncThunk('user/fetchUsers2', async (_, { rejectWithValue }) => {
     try {
-        dispatch(userSlice.actions.usersFetching());
-        const response = await axios.get<IUser[]>(
-          "https://jsonplaceholder.typicode.com/user"
-        );
-        dispatch(userSlice.actions.userFetchingSuccess(response.data));
-    } catch (e: any) {
-        dispatch(userSlice.actions.userFetchingError(e.message));
+        const response = await axios.get<IUser[]>("https://jsonplaceholder.typicode.com/users");
+    return response.data;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
     }
-}
+});
